@@ -28,7 +28,8 @@
   --shadow:0 1px 2px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
 svg{width:1.1em;height:1.1em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* header */
@@ -153,8 +154,8 @@ dialog h4{margin:1.25rem 0 .5rem;font-size:.8rem;text-transform:uppercase;letter
 @media(max-width:560px){.grid{grid-template-columns:1fr}.vrow{grid-template-columns:1fr 1fr}.vrow .x{grid-column:1/-1}}
 
 /* aviso */
-#toast{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%) translateY(150%);background:var(--ink);color:var(--bg);padding:.65rem .65rem .65rem 1rem;border-radius:10px;display:flex;gap:.9rem;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:transform .2s;z-index:20;max-width:calc(100vw - 2rem)}
-#toast.on{transform:translateX(-50%) translateY(0)}
+#toast{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%) translateY(150%);background:var(--ink);color:var(--bg);padding:.65rem .65rem .65rem 1rem;border-radius:10px;display:flex;gap:.9rem;align-items:center;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:transform .2s,visibility .2s;visibility:hidden;z-index:20;max-width:calc(100vw - 2rem)}
+#toast.on{transform:translateX(-50%) translateY(0);visibility:visible}
 #toast button{background:none;border:0;color:var(--clay);font-weight:700;cursor:pointer;padding:.2rem .4rem}
 
 /* animaciones */
@@ -192,6 +193,7 @@ dialog[open]::backdrop{opacity:1}
 .mi:hover{background:var(--soft)}
 .bn{display:none}
 
+.lrow{display:grid;grid-template-columns:1fr 90px;gap:.75rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--line)}
 /* ===== móvil (≤720px) ===== */
 @media (max-width:720px){
   body{font-size:16px}
@@ -218,7 +220,13 @@ dialog[open]::backdrop{opacity:1}
   .stat:hover{transform:none}
   /* filtros */
   .search{flex-basis:100%}
-  .bar select{flex:1}
+  .bar select{flex:1;min-width:0}
+  .chk{flex-basis:100%;min-height:44px}
+  .ph{flex-wrap:wrap;gap:.1rem .75rem}
+  .stat>div{min-width:0}
+  .brand{min-width:0}
+  #delp{flex-basis:100%}
+  .foot{flex-wrap:wrap}
   /* tablas → tarjetas */
   .wrap{overflow:visible}
   table{min-width:0}
@@ -241,7 +249,7 @@ dialog[open]::backdrop{opacity:1}
   @starting-style{dialog[open]{transform:translateY(40px)}}
   dialog form{padding:1.1rem .95rem calc(1rem + env(safe-area-inset-bottom))}
   .foot{position:sticky;bottom:calc(-1rem - env(safe-area-inset-bottom));background:var(--surface);padding-top:.75rem;margin-bottom:-.25rem}
-  .foot .btn{flex:1;justify-content:center}
+  .foot .btn{flex:1 1 40%;justify-content:center}
   .foot .spacer{display:none}
   .lrow{grid-template-columns:1fr 84px}
   .menu{position:fixed;left:.875rem;right:.875rem;top:auto;bottom:calc(5.5rem + env(safe-area-inset-bottom));width:auto}
@@ -249,7 +257,6 @@ dialog[open]::backdrop{opacity:1}
 }
 
 /* etiquetas */
-.lrow{display:grid;grid-template-columns:1fr 90px;gap:.75rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--line)}
 .lrow small{display:block;color:var(--muted)}
 #lrows{max-height:45vh;overflow:auto;margin:.75rem 0}
 #print{display:none}
